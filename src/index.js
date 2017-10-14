@@ -1,28 +1,36 @@
-import './main.css';
+import './index.css'
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk';
-import { composeWithDevTools } from 'redux-devtools-extension';
-import { browserHistory, Router, Route } from 'react-router';
-import { syncHistoryWithStore } from 'react-router-redux';
+
 import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
+
+import thunk from 'redux-thunk';
+
+import createHistory from 'history/createBrowserHistory';
+import { Route } from 'react-router-dom';
+import { ConnectedRouter,  routerMiddleware } from 'react-router-redux';
+import registerServiceWorker from './registerServiceWorker';
 
 import reducers from 'reducers';
 import Layout from 'containers/layout';
 import Phones from 'containers/phones';
 
-const store = createStore( reducers, composeWithDevTools(applyMiddleware(thunk)) );
-const history = syncHistoryWithStore(browserHistory, store);
+const history = createHistory();
+const middleware = routerMiddleware(history);
+const store = createStore(reducers, composeWithDevTools(applyMiddleware(thunk, middleware)));
 
 ReactDOM.render(
     <Provider store={store}>
-        <Router history={history}>
-            <Route component={Layout}>
+        <ConnectedRouter history={history}>
+            <Layout component={Layout}>
                 <Route path='/' component={Phones} />
-            </Route>
-        </Router>
+            </Layout>
+        </ConnectedRouter>
     </Provider>,
     document.getElementById('root')
 );
+
+registerServiceWorker();

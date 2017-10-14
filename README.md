@@ -1,1 +1,1 @@
-React internet-shop
+Online shop on react feat redux
