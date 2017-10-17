@@ -25,6 +25,7 @@ const store = createStore(reducers, composeWithDevTools(applyMiddleware(thunk, m
 ReactDOM.render(
     <Provider store={store}>
         <ConnectedRouter history={history}>
+            {/*Содержит sidebar и место для контента*/}
             <Layout component={Layout}>
                 <Route path='/' component={Phones} />
             </Layout>
