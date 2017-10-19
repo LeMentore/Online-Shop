@@ -26,7 +26,7 @@ ReactDOM.render(
     <Provider store={store}>
         <ConnectedRouter history={history}>
             {/*Содержит sidebar и место для контента*/}
-            <Layout component={Layout}>
+            <Layout>
                 <Route path='/' component={Phones} />
             </Layout>
         </ConnectedRouter>
