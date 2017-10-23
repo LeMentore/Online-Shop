@@ -17,6 +17,7 @@ import registerServiceWorker from './registerServiceWorker';
 import reducers from 'reducers';
 import Layout from 'containers/layout';
 import Phones from 'containers/phones';
+import Phone from 'containers/phone';
 
 const history = createHistory();
 const middleware = routerMiddleware(history);
@@ -25,10 +26,13 @@ const store = createStore(reducers, composeWithDevTools(applyMiddleware(thunk, m
 ReactDOM.render(
     <Provider store={store}>
         <ConnectedRouter history={history}>
-            {/*Содержит sidebar и место для контента*/}
-            <Layout>
-                <Route path='/' component={Phones} />
-            </Layout>
+            <div>
+                {/*Содержит sidebar и место для контента*/}
+                <Layout>
+                    <Route path='/' component={Phones} />
+                </Layout>
+                <Route path="/phones/:id" component={Phone} />
+            </div>
         </ConnectedRouter>
     </Provider>,
     document.getElementById('root')
