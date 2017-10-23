@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import * as R from 'ramda';
 
-import { fetchPhones } from 'actions';
+import { fetchPhones, loadMorePhones } from 'actions';
 import { getPhones } from 'selectors';
 
 class Phones extends Component{
@@ -40,11 +40,17 @@ class Phones extends Component{
     };
 
     render(){
-        const {phones} = this.props;
+        const {phones, loadMorePhones} = this.props;
+        console.log(phones);
         return(
             <div>
                 <div className="books row">
                     {phones.map((phone, index) => this.renderPhone(phone, index))}
+                </div>
+                <div className="row">
+                    <div className="col-md-12">
+                        <button onClick={loadMorePhones} className="pull-right btn btn-primary">Load more</button>
+                    </div>
                 </div>
             </div>
         )
@@ -56,7 +62,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-    fetchPhones
+    fetchPhones,
+    loadMorePhones
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Phones)
