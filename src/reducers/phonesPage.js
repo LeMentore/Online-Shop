@@ -17,6 +17,8 @@ export default (state = initialState, {type, payload}) => {
             });
         case LOAD_MORE_PHONES_SUCCESS:
             const ids = R.pluck('id', payload);
+            console.log(ids);
+            console.log(state.ids);
             return R.merge(state, {
                ids: R.concat(state.ids, ids)
             });
