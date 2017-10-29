@@ -29,10 +29,10 @@ ReactDOM.render(
             <div>
                 {/*Содержит sidebar и место для контента*/}
                 <Layout>
-                    <Route path='/' component={Phones} />
+                    <Route exact path='/' component={Phones} />
+                    <Route path="/phones/:id" component={Phone} />
                 </Layout>
-                <Route path="/phones/:id" component={Phone} />
-            </div>
+        </div>
         </ConnectedRouter>
     </Provider>,
     document.getElementById('root')
