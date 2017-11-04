@@ -48,14 +48,14 @@ export const loadMorePhones = () => async (dispatch, getState) => {
     }
 };
 
-export const fetchPhoneById = id => async dispatch => {
+export const fetchPhoneById = (id) => async dispatch => {
     dispatch({type: FETCH_PHONE_BY_ID_START});
 
     try {
-        const phones = await fetchPhoneByIdApi(id);
+        const phone = await fetchPhoneByIdApi(id);
         dispatch({
             type: FETCH_PHONE_BY_ID_SUCCESS,
-            payload: phones
+            payload: phone
         })
     } catch (err){
         dispatch({
