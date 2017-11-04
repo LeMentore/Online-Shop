@@ -1,12 +1,13 @@
 import React from 'react';
 import Phones from 'containers/phones';
+import Sidebar from 'components/sidebar';
 
 const Layout = () => (
     <div className="view-container">
         <div className="container">
             <div className="row">
                 <div className="col-md-3">
-                    Sidebar
+                    <Sidebar/>
                 </div>
                 <div className="col-md-9">
                     <Phones/>
