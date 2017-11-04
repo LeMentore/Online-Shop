@@ -10,8 +10,8 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 
 import createHistory from 'history/createBrowserHistory';
-import { Route } from 'react-router-dom';
-import { ConnectedRouter,  routerMiddleware } from 'react-router-redux';
+import { Route, Router } from 'react-router-dom';
+import { routerMiddleware } from 'react-router-redux';
 import registerServiceWorker from './registerServiceWorker';
 
 import reducers from 'reducers';
@@ -25,15 +25,15 @@ const store = createStore(reducers, composeWithDevTools(applyMiddleware(thunk, m
 
 ReactDOM.render(
     <Provider store={store}>
-        <ConnectedRouter history={history}>
+        <Router history={history}>
             <div>
                 {/*Содержит sidebar и место для контента*/}
                 <Layout>
                     <Route exact path='/' component={Phones} />
                     <Route path="/phones/:id" component={Phone} />
                 </Layout>
-        </div>
-        </ConnectedRouter>
+            </div>
+        </Router>
     </Provider>,
     document.getElementById('root')
 );

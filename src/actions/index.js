@@ -48,7 +48,7 @@ export const loadMorePhones = () => async (dispatch, getState) => {
     }
 };
 
-export const fetchPhoneById = (id) => async dispatch => {
+export const fetchPhoneById = id => async dispatch => {
     dispatch({type: FETCH_PHONE_BY_ID_START});
 
     try {
