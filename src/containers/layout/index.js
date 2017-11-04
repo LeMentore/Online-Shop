@@ -1,6 +1,7 @@
-import React from 'react'
+import React from 'react';
+import Phones from 'containers/phones';
 
-const Layout = ({children}) => (
+const Layout = () => (
     <div className="view-container">
         <div className="container">
             <div className="row">
@@ -8,7 +9,7 @@ const Layout = ({children}) => (
                     Sidebar
                 </div>
                 <div className="col-md-9">
-                    {children}
+                    <Phones/>
                 </div>
             </div>
         </div>
