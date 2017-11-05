@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
+import { compose } from 'redux';
 import * as R from 'ramda';
 
 import { fetchPhones, loadMorePhones, addPhoneToBasket, fetchCategories } from 'actions';
@@ -59,8 +60,8 @@ class Phones extends Component{
     }
 }
 
-const mapStateToProps = state => ({
-    phones: getPhones(state)
+const mapStateToProps = (state, ownProps) => ({
+    phones: getPhones(state, ownProps)
 });
 
 const mapDispatchToProps = {
@@ -70,7 +71,8 @@ const mapDispatchToProps = {
     fetchCategories
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Phones)
+export default compose(
+    withRouter,connect(mapStateToProps, mapDispatchToProps))(Phones)
 
 /*
 * В mapDispatchToProps мы используем сокращенную форму записи, и когда fetchPhones

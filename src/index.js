@@ -16,7 +16,6 @@ import registerServiceWorker from './registerServiceWorker';
 
 import reducers from 'reducers';
 import Layout from 'containers/layout';
-import Phones from 'containers/phones';
 import Phone from 'containers/phone';
 
 const history = createHistory();
@@ -29,7 +28,7 @@ ReactDOM.render(
             <div>
                 {/*Содержит sidebar и место для контента*/}
                 <Route exact path='/' component={Layout}/>
-                <Route path="/categories/:id" component={Phones}/>
+                <Route path="/categories/:id" component={Layout}/>
                 <Route path="/phones/:id" component={Phone}/>
             </div>
         </Router>
