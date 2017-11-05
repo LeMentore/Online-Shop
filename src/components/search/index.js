@@ -31,7 +31,7 @@ class Search extends Component {
                         <input type="text" onChange={this.handleChange.bind(this)} className="form-control"/>
                     </form>
                     <span className="input-group-btn">
-                        <button className="btn btn-default">
+                        <button className="btn btn-default" onClick={this.handleSubmit.bind(this)}>
                             <span className="glyphicon glyphicon-search"/>
                         </button>
                     </span>
