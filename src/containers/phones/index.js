@@ -72,7 +72,9 @@ const mapDispatchToProps = {
 };
 
 export default compose(
-    withRouter,connect(mapStateToProps, mapDispatchToProps))(Phones)
+    withRouter,
+    connect(mapStateToProps, mapDispatchToProps)
+)(Phones)
 
 /*
 * В mapDispatchToProps мы используем сокращенную форму записи, и когда fetchPhones

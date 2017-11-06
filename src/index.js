@@ -17,6 +17,7 @@ import registerServiceWorker from './registerServiceWorker';
 import reducers from 'reducers';
 import Layout from 'containers/layout';
 import Phone from 'containers/phone';
+import Basket from 'containers/basket';
 
 const history = createHistory();
 const middleware = routerMiddleware(history);
@@ -26,10 +27,11 @@ ReactDOM.render(
     <Provider store={store}>
         <Router history={history}>
             <div>
-                {/*Содержит sidebar и место для контента*/}
+                {/*Layout содержит sidebar и место для контента*/}
                 <Route exact path='/' component={Layout}/>
                 <Route path="/categories/:id" component={Layout}/>
                 <Route path="/phones/:id" component={Phone}/>
+                <Route path="/basket" component={Basket}/>
             </div>
         </Router>
     </Provider>,
