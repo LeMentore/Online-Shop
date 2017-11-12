@@ -5,6 +5,7 @@ import {
     ADD_PHONE_TO_BASKET,
     SEARCH_PHONE,
     FETCH_CATEGORIES_START, FETCH_CATEGORIES_SUCCESS, FETCH_CATEGORIES_FAILURE,
+    REMOVE_PHONE_FROM_BASKET, CLEAN_BASKET
 } from 'actionTypes';
 
 import { getRenderedPhonesLength } from 'selectors';
@@ -102,4 +103,22 @@ export const fetchCategories = () => async dispatch => {
         })
     }
 };
+
+export const removePhoneFromBasket = id => dispatch => {
+    dispatch({
+        type: REMOVE_PHONE_FROM_BASKET,
+        payload: id
+    });
+};
+
+export const cleanBasket = () => dispatch => {
+    dispatch({
+        type: CLEAN_BASKET,
+    });
+};
+
+export const basketCheckout = phones => () => {
+    alert(JSON.stringify(phones));
+};
+
 /*Прослойка API, в которой все это будет обрабатываться*/
