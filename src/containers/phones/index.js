@@ -15,6 +15,7 @@ class Phones extends Component{
 
     renderPhone(phone, index){
         const {addPhoneToBasket} = this.props;
+        console.log(addPhoneToBasket);
         const shortDescription = `${R.take(60, phone.description)}...`;
         return(
             <div className="col-sm-4 col-lg-4 col-md-4 book-list" key={index}>
