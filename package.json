@@ -4,7 +4,6 @@
   "private": true,
   "dependencies": {
     "classnames": "^2.2.5",
-    "create-react-app": "^1.4.1",
     "history": "^4.7.2",
     "ramda": "^0.25.0",
     "react": "^16.0.0",
