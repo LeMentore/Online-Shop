@@ -1,48 +1,51 @@
-import React, {Component} from 'react';
-import { connect } from 'react-redux';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
 
-import { searchPhone } from 'actions';
+import { searchPhone } from 'actions'
 
 class Search extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            value: ''
-        }
-    };
-
-    handleChange(event){
-        this.setState({
-            value: event.target.value
-        })
-    };
-
-    handleSubmit(event){
-        event.preventDefault();
-        this.props.searchPhone(this.state.value)
-    };
-
-    render() {
-        return (
-            <div className="well blosd">
-                <h3 className="lead">Quick shop</h3>
-                <div className="input-group">
-                    <form onSubmit={this.handleSubmit.bind(this)}>
-                        <input type="text" onChange={this.handleChange.bind(this)} className="form-control"/>
-                    </form>
-                    <span className="input-group-btn">
-                        <button className="btn btn-default" onClick={this.handleSubmit.bind(this)}>
-                            <span className="glyphicon glyphicon-search"/>
-                        </button>
-                    </span>
-                </div>
-            </div>
-        );
+  constructor(props) {
+    super(props)
+    this.state = {
+      value: ''
     }
+
+    this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleChange = this.handleChange.bind(this)
+  };
+
+  handleChange (event) {
+    this.setState({
+      value: event.target.value
+    })
+  };
+
+  handleSubmit (event) {
+    event.preventDefault()
+    this.props.searchPhone(this.state.value)
+  };
+
+  render() {
+    return (
+      <div className="well blosd">
+        <h3 className="lead">Quick shop</h3>
+        <div className="input-group">
+          <form onSubmit={this.handleSubmit}>
+            <input type="text" onChange={this.handleChange} className="form-control"/>
+          </form>
+          <span className="input-group-btn">
+            <button className="btn btn-default" onClick={this.handleSubmit}>
+              <span className="glyphicon glyphicon-search"/>
+            </button>
+          </span>
+        </div>
+      </div>
+    )
+  }
 }
 
 const mapDispatchToProps = {
-    searchPhone
-};
+  searchPhone
+}
 
-export default connect(null, mapDispatchToProps)(Search);
+export default connect(null, mapDispatchToProps)(Search)

@@ -1,102 +1,104 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import * as R from 'ramda';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
+import { compose, pick, toPairs } from 'ramda'
 
-import { fetchPhoneById, addPhoneToBasket } from 'actions';
-import { getPhoneById } from 'selectors';
-import BasketCart from 'components/basketCart';
+import { fetchPhoneById, addPhoneToBasket } from 'actions'
+import { getPhoneById } from 'selectors'
+import BasketCart from 'components/basketCart'
 
 class Phone extends Component {
-  componentDidMount(){
-    console.log(this.props);
-    this.props.fetchPhoneById(this.props.match.params.id);
+  componentDidMount () {
+    this.props.fetchPhoneById(this.props.match.params.id)
   }
 
-  renderFields(){
-    const {phone} = this.props;
-    const columnFields = R.compose(
-        R.toPairs,
-        R.pick(['cpu', 'camera', 'size', 'weight', 'display', 'battery', 'memory'])
-    )(phone);
-      console.log('columnFields ', columnFields);
+  renderFields () {
+    const { phone } = this.props
+    const columnFields = compose(
+      toPairs,
+      pick(['cpu', 'camera', 'size', 'weight', 'display', 'battery', 'memory'])
+    )(phone)
 
-      return columnFields.map(([key, value]) => (
-          <div className="column" key={key}>
-            <div className="ab-details-title">
-              <p>{key}</p>
-            </div>
-            <div className="ab-details-info">
-                {value}
-            </div>
-          </div>
-      ))
+    return columnFields.map(([key, value]) => (
+      <div className='column' key={key}>
+        <div className='ab-details-title'>
+          <p>{key}</p>
+        </div>
+        <div className='ab-details-info'>
+          <p>{value}</p>
+        </div>
+      </div>
+    ))
   }
 
-  renderContent(){
-    const {phone} = this.props;
-    return(
-        <div className="thumbnail">
-          <div className="row">
-            <div className="col-md-6">
-              <img src={phone.image} alt={phone.name} />
-            </div>
-            <div className="col-md-6">
-                {this.renderFields()}
-            </div>
-          </div>
-          <div className="caption-full">
-            <h4 className="pull-right">${phone.price}</h4>
-            <h4>{phone.name}</h4>
-            <p>{phone.description}</p>
-          </div>
-        </div>
-    )
-  };
-
-  renderSidebar(){
-    const {phone, addPhoneToBasket} = this.props;
-    return(
-        <div>
-          <p className="lead">Quick shop</p>
-          <BasketCart/>
-          <div className="form-group">
-            <h1>{phone.name}</h1>
-            <h2>${phone.price}</h2>
-          </div>
-          <Link to="/" className="btn btn-info btn-block">Back to store</Link>
-          <button className="btn btn-success btn-block" onClick={() => addPhoneToBasket(phone.id)}>Add to cart</button>
-        </div>
-    )
-  };
-
-  render() {
-    console.log('phone: ', this.props.phone);
-    const {phone} = this.props;
+  renderContent () {
+    const { phone } = this.props
     return (
-      <div className="view-container">
-        <div className="container">
-          <div className="row">
-            <div className="col-md-9">
-                {phone && this.renderContent()}
+      <div className='thumbnail'>
+        <div className='row'>
+          <div className='col-md-6'>
+            <img className='img-thumbnail' src={phone.image} alt={phone.name} />
+          </div>
+          <div className='col-md-6'>
+            {this.renderFields()}
+          </div>
+        </div>
+        <div className='caption-full'>
+          <h4 className='pull-right'>${phone.price}</h4>
+          <h4>{phone.name}</h4>
+          <p>{phone.description}</p>
+        </div>
+      </div>
+    )
+  }
+
+  renderSidebar () {
+    const { phone, addPhoneToBasket } = this.props
+    return(
+      <div>
+        <p className="lead">Quick shop</p>
+        <BasketCart />
+        <div className="form-group">
+          <h1>{phone.name}</h1>
+          <h2>${phone.price}</h2>
+        </div>
+        <Link to="/" className="btn btn-info btn-block">Back to store</Link>
+        <button
+          className="btn btn-success btn-block"
+          onClick={() => addPhoneToBasket(phone.id)}
+        >
+          Add to cart
+        </button>
+      </div>
+    )
+  }
+
+  render () {
+    const { phone } = this.props
+    return (
+      <div className='view-container'>
+        <div className='container'>
+          <div className='row'>
+            <div className='col-md-9'>
+              {phone && this.renderContent()}
             </div>
-            <div className="col-md-3">
-                {phone && this.renderSidebar()}
+            <div className='col-md-3'>
+              {phone && this.renderSidebar()}
             </div>
           </div>
         </div>
       </div>
-    );
+    )
   }
 }
 
 const mapStateToProps = state => ({
-    phone: getPhoneById(state, state.phonePage.id)
-});
+  phone: getPhoneById(state, state.phonePage.id)
+})
 
 const mapDispatchToProps = {
-    fetchPhoneById,
-    addPhoneToBasket
-};
+  fetchPhoneById,
+  addPhoneToBasket
+}
 
-export default connect(mapStateToProps, mapDispatchToProps)(Phone);
+export default connect(mapStateToProps, mapDispatchToProps)(Phone)

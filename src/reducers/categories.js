@@ -1,17 +1,17 @@
-import * as R from 'ramda';
+import { mergeRight, indexBy, prop } from 'ramda'
 
 import {
-    FETCH_CATEGORIES_SUCCESS,
-} from 'actionTypes';
+  FETCH_CATEGORIES_SUCCESS,
+} from 'actionTypes'
 
-const initialState = {};
+const initialState = {}
 
-export default (state = initialState, {type, payload}) => {
-    switch (type){
-        case FETCH_CATEGORIES_SUCCESS:
-            const newValues = R.indexBy(R.prop('id'), payload);
-            return R.merge(state, newValues);
-        default:
-            return state;
-    }
+export default (state = initialState, { type, payload }) => {
+  switch (type) {
+    case FETCH_CATEGORIES_SUCCESS:
+      const newValues = indexBy(prop('id'), payload)
+      return mergeRight(state, newValues)
+    default:
+      return state
+  }
 }

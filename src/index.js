@@ -1,41 +1,32 @@
-import './index.css';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import thunk from 'redux-thunk'
+import { createStore, applyMiddleware } from 'redux'
+import { Provider } from 'react-redux'
+import { createBrowserHistory } from 'history'
+import { routerMiddleware, ConnectedRouter } from 'connected-react-router'
+import { composeWithDevTools } from 'redux-devtools-extension'
 
-import React from 'react';
-import ReactDOM from 'react-dom';
+import createRootReducer from 'reducers'
+import routes from 'routes'
 
-import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
-import { composeWithDevTools } from 'redux-devtools-extension';
+import './index.css'
 
-import thunk from 'redux-thunk';
-
-import createHistory from 'history/createBrowserHistory';
-import { Route, Router } from 'react-router-dom';
-import { routerMiddleware } from 'react-router-redux';
-import registerServiceWorker from './registerServiceWorker';
-
-import reducers from 'reducers';
-import Layout from 'containers/layout';
-import Phone from 'containers/phone';
-import Basket from 'containers/basket';
-
-const history = createHistory();
-const middleware = routerMiddleware(history);
-const store = createStore(reducers, composeWithDevTools(applyMiddleware(thunk, middleware)));
+const history = createBrowserHistory()
+const middlewares = [
+  thunk,
+  routerMiddleware(history)
+]
+const store = createStore(
+  createRootReducer(history),
+  composeWithDevTools(applyMiddleware(...middlewares))
+)
 
 ReactDOM.render(
-    <Provider store={store}>
-        <Router history={history}>
-            <div>
-                {/*Layout содержит sidebar и место для контента*/}
-                <Route exact path='/' component={Layout}/>
-                <Route path="/categories/:id" component={Layout}/>
-                <Route path="/phones/:id" component={Phone}/>
-                <Route path="/basket" component={Basket}/>
-            </div>
-        </Router>
-    </Provider>,
-    document.getElementById('root')
-);
-
-registerServiceWorker();
+  <Provider store={store}>
+    <ConnectedRouter history={history}>
+      {routes}
+    </ConnectedRouter>
+  </Provider>,
+  document.getElementById('root')
+)

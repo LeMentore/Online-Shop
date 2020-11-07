@@ -9,14 +9,10 @@ export default [
   },
   {
     id: "3",
-    name: 'Htc'
+    name: 'Xiaomi'
   },
   {
     id: "4",
-    name: 'Lenovo'
-  },
-  {
-    id: "5",
-    name: 'Microsoft'
+    name: 'Huawei'
   }
 ]

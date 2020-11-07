@@ -1,17 +1,16 @@
-import {combineReducers} from 'redux'
-import {routerReducer} from 'react-router-redux'
+import { combineReducers } from 'redux'
+import { connectRouter } from 'connected-react-router'
+import phones from 'reducers/phones'
+import phonesPage from 'reducers/phonesPage'
+import phonePage from 'reducers/phonePage'
+import basket from 'reducers/basket'
+import categories from 'reducers/categories'
 
-import phones from './phones'
-import phonesPage from './phonesPage'
-import phonePage from './phonePage'
-import basket from './basket'
-import categories from './categories'
-
-export default combineReducers({
-    routing: routerReducer,
-    phones,
-    phonesPage,
-    phonePage,
-    basket,
-    categories
-});
+export default history => combineReducers({
+  router: connectRouter(history),
+  phones,
+  phonesPage,
+  phonePage,
+  basket,
+  categories
+})
