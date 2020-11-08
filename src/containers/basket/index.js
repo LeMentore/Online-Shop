@@ -25,7 +25,10 @@ const Basket = ({ phones, totalPrice, removePhoneFromBasket, cleanBasket, basket
               <td>${phone.price}</td>
               <td>{phone.count}</td>
               <td>
-                <span className="delete-cart" onClick={() => removePhoneFromBasket(phone.id)} />
+                <span
+                  className="glyphicon glyphicon-trash delete-cart"
+                  onClick={() => removePhoneFromBasket(phone.id)}
+                />
               </td>
             </tr>
           ))}
